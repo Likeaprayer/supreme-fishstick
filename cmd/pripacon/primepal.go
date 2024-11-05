@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
+	"os"
 	"runtime"
+	"strconv"
 	"sync"
 )
 
@@ -107,7 +110,12 @@ func findNPrimePalindromes(N int, numWorkers int) ([]int, int) {
 }
 
 func main() {
-	N := 10
+
+	argsWithoutProg := os.Args[1:]
+	N, err := strconv.Atoi(argsWithoutProg[0])
+	if err != nil {
+		log.Fatalf("Invalid Argument")
+	}
 	numWorkers := runtime.NumCPU()
 
 	// fmt.Printf("Finding first %d prime palindromic numbers...\n", N)
